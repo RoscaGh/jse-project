@@ -15,5 +15,6 @@ public class HelloWorld {
         System.out.println("Hello "+name+"!");
         //String name = reader.readLine();
         //System.out.println("Hello "+name+"!");
+        System.out.print("Enter your name ");
     }
 }
