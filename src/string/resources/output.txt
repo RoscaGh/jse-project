@@ -1,0 +1,20 @@
+Fraza(1)
+MERE, MERE, MERE ...MULTE PERE SI IAR MERE FOARTE, FOARTE GUSTOASE SI DIN NOU E VARA SI IAR
+mere, mere, mere ...multe pere si iar mere foarte, foarte gustoase si din nou e vara si iar
+Lungimea fraze: 91
+Numarul de vocale: 35
+Numarul de consoane: 32
+Numarul de cuvinte: 18
+Lungimea cuvintului max - 8: gustoase
+Lungimea cuvintului min - 1: e
+Cuvintele duble sunt: mere, si, iar, foarte
+Fraza(2)
+CELE MAI FRUMOASE FLORI, INFLORESC IN MAI ............IN CELE MAI FRUMOASE TARI
+cele mai frumoase flori, infloresc in mai ............in cele mai frumoase tari
+Lungimea fraze: 79
+Numarul de vocale: 27
+Numarul de consoane: 28
+Numarul de cuvinte: 12
+Lungimea cuvintului max - 9: infloresc
+Lungimea cuvintului min - 2: in, in
+Cuvintele duble sunt: cele, mai, frumoase, in
