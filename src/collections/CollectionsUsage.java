@@ -2,12 +2,16 @@ package collections;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class CollectionsUsage {
     public static void main(String[] args) throws IOException {
-//        String outFile = new File(".").getCanonicalPath()+"\\src\\collections\\employee-input.txt";
+        String outFile = new File(".").getCanonicalPath()+"\\src\\collections\\employee-final.txt";
         String inFile=new File(".").getCanonicalPath()+"\\src\\collections\\employee-input.txt";
         ArrayList<String> empl=read_employee(inFile);
         System.out.println("--------Lista initiala");
@@ -21,7 +25,23 @@ public class CollectionsUsage {
         name_empl = new HashSet<>(read_only_name2(empl));
         System.out.println("---------------Only distinct name HashSet");
         name_empl.forEach(System.out::println);
+        CreateFile(outFile);
+        FileWriter myWriter = new FileWriter(outFile);
+        LocalDate tt=LocalDateTime.now().toLocalDate();
+        for (String s : empl) {
+            LocalDate dateB=generate_db();
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            myWriter.write(s.concat(" "+dateB.format(myFormatObj)+" | "+difference(tt,dateB)+'\n'));
+        }
+        myWriter.close();
     }
+    private static int difference(LocalDate a, LocalDate b){
+        return LocalDate.ofEpochDay(a.toEpochDay()-b.toEpochDay()).getYear()-1970;
+    }
+    private static LocalDate generate_db() {
+        return LocalDate.ofYearDay(1970+(int)(Math.random()*30),(int)(Math.random()*365));
+    }
+
     private static ArrayList<String> read_employee(String path) throws FileNotFoundException {
         File myInput = new File(path);
         Scanner myReader = new Scanner(myInput);
@@ -51,5 +71,18 @@ public class CollectionsUsage {
                 nameEm.add(name);
         }
         return nameEm;
+    }
+    private static void CreateFile(String path) {
+        try {
+            File myObj = new File(path);
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 }
