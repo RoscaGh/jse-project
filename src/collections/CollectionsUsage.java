@@ -34,7 +34,40 @@ public class CollectionsUsage {
             myWriter.write(s.concat(" "+dateB.format(myFormatObj)+" | "+difference(tt,dateB)+'\n'));
         }
         myWriter.close();
+
+        String inFileP = new File(".").getCanonicalPath()+"\\src\\collections\\products-input.txt";
+        HashMap<String, String> prod=read_product(inFileP);
+//        -----------ADD new product
+        prod.put("1243","Mouse A4tech G34");
+        prod.put("1244","Masa calculator MX espress");
+        prod.put("1245","Smartphone Xiaomi RedMi 9 note");
+//        prod.put("1245","Monitor IPS LG XT345");
+        prod.replace("1245","Monitor IPS LG XT345");
+        for (String s : prod.keySet()) {
+            System.out.println(s+" "+prod.get(s));
+        }
+        String outFileP = new File(".").getCanonicalPath()+"\\src\\collections\\products-output.txt";
+        CreateFile(outFileP);
+        myWriter = new FileWriter(outFileP);
+        for (String s : prod.keySet()) {
+            myWriter.write(s+'|'+prod.get(s)+'\n');
+        }
+        myWriter.close();
+
     }
+
+    private static HashMap<String, String> read_product(String path) throws FileNotFoundException {
+        File myInput = new File(path);
+        Scanner myReader = new Scanner(myInput);
+        HashMap<String, String> prod=new HashMap<>();
+        while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            String[] keys=data.split("[|]");
+            prod.put(keys[0],keys[1]);
+        }
+        return prod;
+    }
+
     private static int difference(LocalDate a, LocalDate b){
         return LocalDate.ofEpochDay(a.toEpochDay()-b.toEpochDay()).getYear()-1970;
     }
