@@ -6,13 +6,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class CollectionsUsage {
     public static void main(String[] args) throws IOException {
-        String outFile = new File(".").getCanonicalPath()+"\\src\\collections\\employee-final.txt";
-        String inFile=new File(".").getCanonicalPath()+"\\src\\collections\\employee-input.txt";
+        String outFile ="src/collections/employee-final.txt";
+        String inFile="src/collections/employee-input.txt";
         ArrayList<String> empl=read_employee(inFile);
         System.out.println("--------Lista initiala");
         empl.forEach(System.out::println);
@@ -31,7 +32,7 @@ public class CollectionsUsage {
         for (String s : empl) {
             LocalDate dateB=generate_db();
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            myWriter.write(s.concat(" "+dateB.format(myFormatObj)+" | "+difference(tt,dateB)+'\n'));
+            myWriter.write(s.concat(" "+dateB.format(myFormatObj)+" | "+getAge(tt,dateB)+'\n'));
         }
         myWriter.close();
 
@@ -68,8 +69,8 @@ public class CollectionsUsage {
         return prod;
     }
 
-    private static int difference(LocalDate a, LocalDate b){
-        return LocalDate.ofEpochDay(a.toEpochDay()-b.toEpochDay()).getYear()-1970;
+    private static int getAge(LocalDate endDate, LocalDate startDate){
+        return Period.between(startDate,endDate).getYears();
     }
     private static LocalDate generate_db() {
         return LocalDate.ofYearDay(1970+(int)(Math.random()*30),(int)(Math.random()*365));
